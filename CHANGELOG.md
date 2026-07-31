@@ -6,12 +6,14 @@ _Bug fixes_
 
 _Dependencies_
 
-- Bumped `google.golang.org/grpc` from `1.63.2` to `1.79.3`. ([#3](https://github.com/vthiery/steampipe-plugin-iru/pull/3))
+- Bumped `google.golang.org/grpc` from `1.63.2` to `1.82.1`. ([#3](https://github.com/vthiery/steampipe-plugin-iru/pull/3), [#8](https://github.com/vthiery/steampipe-plugin-iru/pull/8))
 - Bumped `github.com/hashicorp/go-getter` from `1.7.5` to `1.8.6`. ([#5](https://github.com/vthiery/steampipe-plugin-iru/pull/5))
 - Bumped `go.opentelemetry.io/otel/sdk` from `1.42.0` to `1.43.0`. ([#4](https://github.com/vthiery/steampipe-plugin-iru/pull/4))
 - Bumped `github.com/go-jose/go-jose/v4` from `4.1.3` to `4.1.4`. ([#10](https://github.com/vthiery/steampipe-plugin-iru/pull/10))
 - Bumped `github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream` from `1.7.7` to `1.7.8`. ([#11](https://github.com/vthiery/steampipe-plugin-iru/pull/11))
 - Bumped `golang.org/x/crypto` from `0.49.0` to `0.52.0`. ([#7](https://github.com/vthiery/steampipe-plugin-iru/pull/7))
+- Bumped `golang.org/x/net` from `0.54.0` to `0.55.0`. ([#13](https://github.com/vthiery/steampipe-plugin-iru/pull/13))
+- Bumped `github.com/aws/aws-sdk-go-v2/service/s3` from `1.97.1` to `1.97.3`. ([#12](https://github.com/vthiery/steampipe-plugin-iru/pull/12))
 
 ## v0.0.1 [2026-03-09]
 
