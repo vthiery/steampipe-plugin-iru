@@ -5,11 +5,20 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: read
+
 jobs:
   build:
     name: Build and publish
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write # push the plugin OCI image to ghcr.io
     steps:
-      - uses: francois2metz/steampipe-plugin-build-push-action@v0
+      # Temporary: fork carrying the base64 -w0 Authorization header fix.
+      # Revert to francois2metz/steampipe-plugin-build-push-action@v0 once
+      # https://github.com/francois2metz/steampipe-plugin-build-push-action/pull/15 ships.
+      - uses: vthiery/steampipe-plugin-build-push-action@46afca64022517e4f3ed8b7c238e492d54a8d8ba # main
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
