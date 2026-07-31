@@ -2,6 +2,7 @@ package iru
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
@@ -12,19 +13,21 @@ import (
 
 // Blueprint represents a blueprint in an Iru tenant.
 type Blueprint struct {
-	ActiveLibraryItems      int      `json:"active_library_items"`
-	ActiveDevices           int      `json:"active_devices"`
-	ComputerCount           int      `json:"computer_count"`
-	Description             string   `json:"description"`
-	EnrollmentCodeEnabled   bool     `json:"enrollment_code_is_enabled"`
-	ID                      string   `json:"id"`
-	IsDEPEnrollmentEnabled  bool     `json:"is_dep_enrollment_enabled"`
-	IsDefaultBlueprint      bool     `json:"is_default_blueprint"`
-	IsUserPortalEnabled     bool     `json:"is_user_portal_enabled"`
-	Name                    string   `json:"name"`
-	Params                  string   `json:"params"`
-	SourceBlueprint         *string  `json:"source_blueprint"`
-	Tags                    []string `json:"tags"`
+	ActiveLibraryItems     int    `json:"active_library_items"`
+	ActiveDevices          int    `json:"active_devices"`
+	ComputerCount          int    `json:"computer_count"`
+	Description            string `json:"description"`
+	EnrollmentCodeEnabled  bool   `json:"enrollment_code_is_enabled"`
+	ID                     string `json:"id"`
+	IsDEPEnrollmentEnabled bool   `json:"is_dep_enrollment_enabled"`
+	IsDefaultBlueprint     bool   `json:"is_default_blueprint"`
+	IsUserPortalEnabled    bool   `json:"is_user_portal_enabled"`
+	Name                   string `json:"name"`
+	// The API returns params as a JSON object (per-blueprint settings), not a
+	// string — decoding it into a string fails the whole list call.
+	Params          json.RawMessage `json:"params"`
+	SourceBlueprint *string         `json:"source_blueprint"`
+	Tags            []string        `json:"tags"`
 }
 
 // blueprintsResponse is the envelope returned by GET /api/v1/blueprints.
@@ -60,7 +63,7 @@ func tableIruBlueprint() *plugin.Table {
 			{Name: "computer_count", Type: proto.ColumnType_INT, Description: "Total number of computers (Mac devices) in this blueprint."},
 			{Name: "source_blueprint", Type: proto.ColumnType_STRING, Description: "ID of the blueprint this one was cloned from, if any."},
 			{Name: "tags", Type: proto.ColumnType_JSON, Description: "Tags associated with this blueprint."},
-			{Name: "params", Type: proto.ColumnType_STRING, Description: "Additional blueprint parameters."},
+			{Name: "params", Type: proto.ColumnType_JSON, Description: "Additional blueprint parameters."},
 		},
 	}
 }
